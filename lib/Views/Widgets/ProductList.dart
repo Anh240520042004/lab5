@@ -1,9 +1,11 @@
+import 'package:exam/Views/Widgets/ProductWidget.dart';
 import 'package:flutter/material.dart';
 
-class ProductWidget extends StatelessWidget {
-  const ProductWidget({super.key});
+class ProductList extends StatelessWidget {
+  const ProductList({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return const Column(children: [Image.asset(name)]);
+    return ListView(children: [for (int i = 1; i <= 5; i++) Productwidget()]);
   }
 }
