@@ -1,6 +1,7 @@
 import 'package:exam/Views/Widgets/ProductList.dart';
 import 'package:flutter/material.dart';
 import 'package:exam/Views/Widgets/ButtonBar.dart';
+import 'package:exam/Views/Widgets/Product_Widget.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
@@ -18,7 +19,7 @@ class Homepage extends StatelessWidget {
           IconButton(onPressed: () {}, icon: Icon(Icons.search)),
         ],
       ),
-      body: ProductList(),
+      body: ProductWidget(),
       bottomNavigationBar: Buttonbar(),
     );
   }

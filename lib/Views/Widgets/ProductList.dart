@@ -6,6 +6,10 @@ class ProductList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(children: [for (int i = 1; i <= 5; i++) Productwidget()]);
+    return ListView.separated(
+      itemCount: 5,
+      separatorBuilder: (context, index) => ProductWidgetStateFull(),
+      itemBuilder: (context, index) => ProductWidgetStateFull(),
+    );
   }
 }

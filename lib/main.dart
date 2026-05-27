@@ -10,6 +10,10 @@ class MyApp extends StatelessWidget {
   onPress() {}
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: Homepage());
+    return MaterialApp(
+      theme: ThemeData.light(),
+      debugShowCheckedModeBanner: false,
+      home: Homepage(),
+    );
   }
 }
