@@ -1,9 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
     <application
+
         android:label="exam"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
-        <activity
+         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
@@ -23,7 +25,11 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
+                <!-- Thay example.com bằng domain website của bạn -->
+                <data android:scheme="https" android:host="example.com" />
+                <data android:scheme="http" />
             </intent-filter>
+
         </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->

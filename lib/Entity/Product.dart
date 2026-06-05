@@ -4,7 +4,7 @@ class Product {
   final String name;
   final String id;
   final String? image;
-  double price;
+  final double price;
   Product({
     required this.name,
     required this.id,
@@ -38,11 +38,41 @@ class Product {
   }
 
   static List<Product> products = [
-    Product(id: "P01", name: "Iphone 14", price: 20000),
-    Product(id: "P02", name: "Iphone 15", price: 30000),
-    Product(id: "P03", name: "Iphone 16", price: 40000),
-    Product(id: "P04", name: "Iphone 17", price: 50000),
-    Product(id: "P05", name: "Iphone 18", price: 60000),
-    Product(id: "P06", name: "Iphone 19", price: 70000),
+    Product(
+      id: "P01",
+      name: "Iphone 14",
+      price: 20000,
+      image: 'assets/images/dog.jpg',
+    ),
+    Product(
+      id: "P02",
+      name: "Iphone 15",
+      price: 30000,
+      image: 'assets/images/dog.jpg',
+    ),
+    Product(
+      id: "P03",
+      name: "Iphone 16",
+      price: 40000,
+      image: 'assets/images/dog.jpg',
+    ),
+    Product(
+      id: "P04",
+      name: "Iphone 17",
+      price: 50000,
+      image: 'assets/images/dog.jpg',
+    ),
+    Product(
+      id: "P05",
+      name: "Iphone 18",
+      price: 60000,
+      image: 'assets/images/dog.jpg',
+    ),
+    Product(
+      id: "P06",
+      name: "Iphone 19",
+      price: 70000,
+      image: 'assets/images/dog.jpg',
+    ),
   ];
 }

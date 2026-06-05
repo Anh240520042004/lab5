@@ -29,6 +29,13 @@ class _ProductWidgetStateFullState extends State<ProductWidgetStateFull> {
         child: Card(
           child: Column(
             children: [
+              //
+              Wrap(
+                children: [
+                  for (int i = 0; i <= 10; i++)
+                    ElevatedButton(child: Text("button 1"), onPressed: () {}),
+                ],
+              ),
               //Ảnh sản phẩm
               Expanded(
                 flex: 7,
@@ -55,7 +62,7 @@ class _ProductWidgetStateFullState extends State<ProductWidgetStateFull> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => ProductDetail(),
+                                builder: (context) => ProductDetailPage(),
                               ),
                             );
                           },
@@ -104,6 +111,11 @@ class _ProductWidgetStateFullState extends State<ProductWidgetStateFull> {
                     ),
                   ],
                 ),
+              ),
+              SizedBox(width: 15),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [for (int i = 0; i < 5; i++) Icon(Icons.star)],
               ),
               SizedBox(width: 15),
               //Mô tả sản phẩm

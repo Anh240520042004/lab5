@@ -1,8 +1,32 @@
+import 'package:exam/Reposistory/ProductDAO.dart';
 import 'package:flutter/material.dart';
+import 'package:exam/Entity/Product.dart';
 
-class ProductWidget extends StatelessWidget {
-  const ProductWidget({super.key});
+class ProductListWidget extends StatelessWidget {
+  ProductListWidget({super.key});
+  var products = Product.products;
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: [
+        for (int i = 0; i < 5; i++) ProductWidget(product: products[i]),
+      ],
+    );
+  }
+}
 
+class ProductWidget extends StatefulWidget {
+  Product product;
+  ProductWidget({super.key, required this.product});
+
+  @override
+  State<ProductWidget> createState() => _ProductWidgetState(product: product);
+}
+
+class _ProductWidgetState extends State<ProductWidget> {
+  Product product;
+  _ProductWidgetState({required this.product});
+  int _count = 0;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -10,48 +34,103 @@ class ProductWidget extends StatelessWidget {
       child: Container(
         width: double.infinity,
         height: 500,
-        decoration: BoxDecoration(
-          border: Border.all(width: 3, color: Colors.red),
-        ),
+
         child: Column(
           children: [
-            //Product Image
-            Container(
-              width: double.infinity,
-              height: 200,
-              child: Image.asset('assets/images/dog.jpg', fit: BoxFit.fill),
-            ),
-            //Product name, price, like
-            Row(
+            //
+            Wrap(
+              alignment: WrapAlignment.spaceEvenly,
               children: [
-                Column(
-                  children: [
-                    Text("Product Name: Tea cup dog"),
-                    Text("Price: 450\$"),
-                  ],
-                ),
-                Icon(
-                  Icons.start,
-                  color: Colors.yellow,
-                  fontWeight: FontWeight.bold,
-                ),
-                Text("41"),
+                for (int i = 0; i <= 10; i++)
+                  ElevatedButton(child: Text("button 1"), onPressed: () {}),
               ],
             ),
-            //List Icons
-            Row(
-              children: [
-                for (int i = 1; i <= 5; i++)
-                  Icon(
-                    Icons.star,
-                    color: Colors.yellow,
-                    fontWeight: FontWeight.bold,
+            //Product Image
+            Expanded(
+              flex: 7,
+              child: Container(
+                width: double.infinity,
+                height: 300,
+                child: Stack(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: 300,
+                      child: Image.asset(product.image!, fit: BoxFit.fill),
+                    ),
+                    Align(
+                      alignment: AlignmentGeometry.bottomRight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: FloatingActionButton.extended(
+                          onPressed: () {},
+                          label: Text("Add to cart"),
+                          icon: Icon(Icons.shopping_cart),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            //Product name, price, like
+            Expanded(
+              flex: 2,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    flex: 8,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text("Product Name: ${product.name}"),
+                        Text("Price: ${product.price}\$"),
+                      ],
+                    ),
                   ),
+                  Expanded(
+                    flex: 1,
+                    child: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _count++;
+                        });
+                      },
+                      icon: Icon(
+                        Icons.plus_one,
+                        color: Colors.yellow,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Expanded(flex: 1, child: Text(_count.toString())),
+                ],
+              ),
+            ),
+
+            //List Icons
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                for (int i = 0; i < 5; i++)
+                  Icon(Icons.star, color: Colors.yellow),
               ],
             ),
             //Product Description
-            Text(
-              "Theo ghi nhận của phóng viên Dân trí, dự án được xây dựng trên một khu đất với nhiều hộ dân sinh sống bên trong, ở giữa khu đất là một khu nghĩa trang với hàng trăm ngôi mộ. Phần lớn diện tích khu vực này hiện vẫn còn bị bao phủ bởi đầm lầy, cỏ cây, bụi rậm, khá hoang sơ.",
+            Expanded(
+              flex: 3,
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    "Theo ghi nhận của phóng viên Dân trí, dự án được xây dựng trên một khu đất với nhiều hộ dân sinh sống bên trong, ở giữa khu đất là một khu nghĩa trang với hàng trăm ngôi mộ. Phần lớn diện tích khu vực này hiện vẫn còn bị bao phủ bởi đầm lầy, cỏ cây, bụi rậm, khá hoang sơ. Theo ghi nhận của phóng viên Dân trí, dự án được xây dựng trên một khu đất với nhiều hộ dân sinh sống bên trong, ở giữa khu đất là một khu nghĩa trang với hàng trăm ngôi mộ. Phần lớn diện tích khu vực này hiện vẫn còn bị bao phủ bởi đầm lầy, cỏ cây, bụi rậm, khá hoang sơ. Theo ghi nhận của phóng viên Dân trí, dự án được xây dựng trên một khu đất với nhiều hộ dân sinh sống bên trong, ở giữa khu đất là một khu nghĩa trang với hàng trăm ngôi mộ. Phần lớn diện tích khu vực này hiện vẫn còn bị bao phủ bởi đầm lầy, cỏ cây, bụi rậm, khá hoang sơ.Theo ghi nhận của phóng viên Dân trí, dự án được xây dựng trên một khu đất với nhiều hộ dân sinh sống bên trong, ở giữa khu đất là một khu nghĩa trang với hàng trăm ngôi mộ. Phần lớn diện tích khu vực này hiện vẫn còn bị bao phủ bởi đầm lầy, cỏ cây, bụi rậm, khá hoang sơ.",
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
