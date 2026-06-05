@@ -17,17 +17,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      /*
       routes: {
         '/': (context) => Homepage(),
         '/detail': (context) => ProductDetailPage(),
         '/about': (context) => AboutPage(),
       },
-*/
+
       theme: ThemeData.light(),
       debugShowCheckedModeBanner: false,
       // home: DefaultTabController(length: 3, child: HometabPage()),
-      home: AboutPage(),
+      // home: AboutPage(),
     );
   }
 }

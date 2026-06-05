@@ -7,6 +7,31 @@ class ProductListWidget extends StatelessWidget {
   var products = Product.products;
   @override
   Widget build(BuildContext context) {
+    return ReponsiveProudct(products: products);
+  }
+}
+
+class ReponsiveProudct extends StatelessWidget {
+  List<Product> products;
+  ReponsiveProudct({super.key, required this.products});
+  @override
+  Widget build(BuildContext context) {
+    return GridView.count(
+      crossAxisCount: MediaQuery.of(context).size.width < 450 ? 1 : 2,
+      //children: [for (int i=0;i<products.length;i++)
+      //  ProductWidget(product: products[i])],
+      children: products
+          .map((product) => ProductWidget(product: product))
+          .toList(),
+    );
+  }
+}
+
+class OneColumnProduct extends StatelessWidget {
+  List<Product> products;
+  OneColumnProduct({super.key, required this.products});
+  @override
+  Widget build(BuildContext context) {
     return ListView(
       children: [
         for (int i = 0; i < 5; i++) ProductWidget(product: products[i]),
@@ -26,25 +51,41 @@ class ProductWidget extends StatefulWidget {
 class _ProductWidgetState extends State<ProductWidget> {
   Product product;
   _ProductWidgetState({required this.product});
-  int _count = 0;
+  //int _count = 0;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10),
-      child: Container(
-        width: double.infinity,
+      child: ProductContainer(product: product),
+    );
+  }
+}
+
+class ProductContainer extends StatelessWidget {
+  Product product;
+  ProductContainer({super.key, required this.product});
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) => Container(
+        width: constraints.maxWidth <= 450
+            ? MediaQuery.of(context).size.width
+            : MediaQuery.of(context).size.width / 2,
         height: 500,
 
         child: Column(
           children: [
             //
             Wrap(
-              alignment: WrapAlignment.spaceEvenly,
+              crossAxisAlignment: WrapCrossAlignment.start,
+              alignment: WrapAlignment.start,
               children: [
-                for (int i = 0; i <= 10; i++)
+                for (int i = 0; i < 10; i++)
                   ElevatedButton(child: Text("button 1"), onPressed: () {}),
               ],
             ),
+
             //Product Image
             Expanded(
               flex: 7,
@@ -93,11 +134,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                   Expanded(
                     flex: 1,
                     child: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          _count++;
-                        });
-                      },
+                      onPressed: () {},
                       icon: Icon(
                         Icons.plus_one,
                         color: Colors.yellow,
@@ -105,7 +142,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                       ),
                     ),
                   ),
-                  Expanded(flex: 1, child: Text(_count.toString())),
+                  Expanded(flex: 1, child: Text("456")),
                 ],
               ),
             ),
