@@ -4,6 +4,7 @@ class ProductDAO {
   List<Product>? l;
   ProductDAO();
   List<Product> getAllProduct() {
+    //Lấy dữ liệu từ DataBase
     l = Product.products;
     return l!;
   }

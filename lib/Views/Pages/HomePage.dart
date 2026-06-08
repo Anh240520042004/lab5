@@ -1,4 +1,6 @@
+import 'package:exam/Entity/Product.dart';
 import 'package:exam/Views/Pages/AboutPage.dart';
+import 'package:exam/Views/Widgets/ProductList.dart';
 //import 'package:exam/Views/Widgets/ProductList.dart';
 import 'package:flutter/material.dart';
 import 'package:exam/Views/Widgets/ButtonBar.dart';
@@ -32,13 +34,16 @@ class Homepage1 extends StatelessWidget {
 }
 
 class Homepage extends StatefulWidget {
-  const Homepage({super.key});
+  List<Product> products;
+  Homepage({super.key, required this.products});
 
   @override
-  State<Homepage> createState() => _HomepageState();
+  State<Homepage> createState() => _HomepageState(products: products);
 }
 
 class _HomepageState extends State<Homepage> {
+  List<Product> products;
+  _HomepageState({required this.products});
   int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -64,7 +69,7 @@ class _HomepageState extends State<Homepage> {
         ],
       ),
       body: [
-        ProductListWidget(),
+        ProductListReponsive(products: products),
         Center(child: Text("About")),
         Center(child: Text("Detail product")),
       ][_selectedIndex],

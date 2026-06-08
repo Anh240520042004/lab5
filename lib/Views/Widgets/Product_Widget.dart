@@ -61,10 +61,16 @@ class _ProductWidgetState extends State<ProductWidget> {
   }
 }
 
-class ProductContainer extends StatelessWidget {
+class ProductContainer extends StatefulWidget {
   Product product;
   ProductContainer({super.key, required this.product});
 
+  @override
+  State<ProductContainer> createState() => _ProductContainerState();
+}
+
+class _ProductContainerState extends State<ProductContainer> {
+  int _selectSort = 0;
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -76,6 +82,19 @@ class ProductContainer extends StatelessWidget {
 
         child: Column(
           children: [
+            //
+            DropdownButton<int>(
+              value: _selectSort,
+              items: [
+                DropdownMenuItem(child: Text("A-Z"), value: 0),
+                DropdownMenuItem(child: Text("Z-A"), value: 1),
+                DropdownMenuItem(child: Text("Low to High"), value: 2),
+                DropdownMenuItem(child: Text("High to Low"), value: 3),
+              ],
+              onChanged: (value) => setState(() {
+                _selectSort = value!;
+              }),
+            ),
             //
             Wrap(
               crossAxisAlignment: WrapCrossAlignment.start,
@@ -97,7 +116,10 @@ class ProductContainer extends StatelessWidget {
                     Container(
                       width: double.infinity,
                       height: 300,
-                      child: Image.asset(product.image!, fit: BoxFit.fill),
+                      child: Image.asset(
+                        widget.product.image!,
+                        fit: BoxFit.fill,
+                      ),
                     ),
                     Align(
                       alignment: AlignmentGeometry.bottomRight,
@@ -126,8 +148,8 @@ class ProductContainer extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text("Product Name: ${product.name}"),
-                        Text("Price: ${product.price}\$"),
+                        Text("Product Name: ${widget.product.name}"),
+                        Text("Price: ${widget.product.price}\$"),
                       ],
                     ),
                   ),
