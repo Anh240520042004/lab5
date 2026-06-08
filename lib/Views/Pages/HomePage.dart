@@ -1,93 +1,101 @@
 import 'package:exam/Entity/Product.dart';
 import 'package:exam/Views/Pages/AboutPage.dart';
-import 'package:exam/Views/Widgets/ProductList.dart';
-//import 'package:exam/Views/Widgets/ProductList.dart';
-import 'package:flutter/material.dart';
+import 'package:exam/Views/Pages/ProductDetailPage.dart';
 import 'package:exam/Views/Widgets/ButtonBar.dart';
+import 'package:exam/Views/Widgets/ProductList.dart';
 import 'package:exam/Views/Widgets/Product_Widget.dart';
+import 'package:flutter/material.dart';
 
 class Homepage1 extends StatelessWidget {
   const Homepage1({super.key});
-  AboutOnPress(BuildContext context) {
+
+  void aboutOnPress(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => AboutPage()),
+      MaterialPageRoute(builder: (context) => const AboutPage()),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
         leading: IconButton(
-          onPressed: AboutOnPress(context),
-          icon: Icon(Icons.account_box_outlined),
+          onPressed: () => aboutOnPress(context),
+          icon: const Icon(Icons.account_box_outlined),
         ),
       ),
       body: ProductListWidget(),
-      bottomNavigationBar: Buttonbar(),
+      bottomNavigationBar: const Buttonbar(),
     );
   }
 }
 
 class Homepage extends StatefulWidget {
-  List<Product> products;
-  Homepage({super.key, required this.products});
+  final List<Product> products;
+
+  const Homepage({super.key, required this.products});
 
   @override
-  State<Homepage> createState() => _HomepageState(products: products);
+  State<Homepage> createState() => _HomepageState();
 }
 
 class _HomepageState extends State<Homepage> {
-  List<Product> products;
-  _HomepageState({required this.products});
   int _selectedIndex = 0;
+
+  void openFirstProductDetail() {
+    if (widget.products.isEmpty) {
+      return;
+    }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProductDetailPage(product: widget.products.first),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        leading: IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
-        title: Center(child: Text("Home Page")),
+        leading: const Icon(Icons.menu),
+        title: const Text('Home Page'),
         actions: [
           IconButton(
             onPressed: () {
               Navigator.pushNamed(context, '/about');
             },
-            icon: Icon(Icons.account_box_outlined),
+            icon: const Icon(Icons.account_box_outlined),
           ),
           IconButton(
-            onPressed: () => Navigator.pushNamed(context, '/detail'),
-
-            icon: Icon(Icons.details),
+            onPressed: widget.products.isEmpty ? null : openFirstProductDetail,
+            icon: const Icon(Icons.details),
           ),
         ],
       ),
       body: [
-        ProductListReponsive(products: products),
-        Center(child: Text("About")),
-        Center(child: Text("Detail product")),
+        ProductListReponsive(products: widget.products),
+        const Center(child: Text('Detail product')),
+        const Center(child: Text('About')),
       ][_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.blue,
-
         onTap: (index) {
           setState(() {
             _selectedIndex = index;
           });
         },
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.details), label: "Detail"),
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.details), label: 'Detail'),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_box_outlined),
-            label: "About",
+            label: 'About',
           ),
         ],
       ),

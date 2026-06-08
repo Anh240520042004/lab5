@@ -1,13 +1,14 @@
 import 'package:exam/Entity/Product.dart';
 import 'package:exam/Reposistory/ProductDAO.dart';
 
-class Productservice {
-  List<Product>? products;
-  Productservice() {
-    ProductDAO productDAO = ProductDAO();
-    products = productDAO!.getAllProduct();
-  }
+class ProductService {
+  final ProductDAO _productDAO = ProductDAO();
+
   List<Product> getAllProduct() {
-    return products!;
+    return _productDAO.getAllProduct();
   }
+}
+
+class Productservice extends ProductService {
+  Productservice();
 }

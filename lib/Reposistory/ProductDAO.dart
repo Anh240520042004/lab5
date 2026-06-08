@@ -1,27 +1,27 @@
 import 'package:exam/Entity/Product.dart';
 
 class ProductDAO {
-  List<Product>? l;
-  ProductDAO();
+  final List<Product> _products = List<Product>.from(Product.products);
+
   List<Product> getAllProduct() {
-    //Lấy dữ liệu từ DataBase
-    l = Product.products;
-    return l!;
+    return _products;
   }
 
-  void addProduct(Product p) {
-    var index = l!.indexWhere((element) => element.id == p.id);
-    if (index < 0) l!.add(p);
+  void addProduct(Product product) {
+    var index = _products.indexWhere((element) => element.id == product.id);
+    if (index < 0) {
+      _products.add(product);
+    }
   }
 
   void deleteProduct(String id) {
-    l!.removeWhere((element) => element.id == id);
+    _products.removeWhere((element) => element.id == id);
   }
 
-  void updateProduct(Product pNew) {
-    var index = l!.indexWhere((element) => element.id == pNew.id);
-    var p = l![index];
-    l!.remove(p);
-    l!.add(pNew);
+  void updateProduct(Product productNew) {
+    var index = _products.indexWhere((element) => element.id == productNew.id);
+    if (index >= 0) {
+      _products[index] = productNew;
+    }
   }
 }

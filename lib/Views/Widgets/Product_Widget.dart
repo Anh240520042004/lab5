@@ -1,4 +1,3 @@
-import 'package:exam/Reposistory/ProductDAO.dart';
 import 'package:flutter/material.dart';
 import 'package:exam/Entity/Product.dart';
 
@@ -122,7 +121,7 @@ class _ProductContainerState extends State<ProductContainer> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentGeometry.bottomRight,
+                      alignment: Alignment.bottomRight,
                       child: Padding(
                         padding: const EdgeInsets.all(20),
                         child: FloatingActionButton.extended(
