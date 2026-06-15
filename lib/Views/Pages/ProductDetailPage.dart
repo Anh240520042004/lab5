@@ -1,5 +1,7 @@
 import 'package:exam/Entity/Product.dart';
+import 'package:exam/ViewModel/CartService.dart';
 import 'package:exam/Views/Widgets/ButtonBar.dart';
+import 'package:exam/Views/Widgets/CartBadgeButton.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailPage extends StatelessWidget {
@@ -13,6 +15,7 @@ class ProductDetailPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.blue,
         title: const Text('Product Detail'),
+        actions: const [CartBadgeButton()],
       ),
       bottomNavigationBar: const Buttonbar(),
       body: SingleChildScrollView(
@@ -45,6 +48,20 @@ class ProductDetailPage extends StatelessWidget {
             Text(
               product.description,
               textAlign: TextAlign.justify,
+            ),
+            const SizedBox(height: 24),
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton.icon(
+                onPressed: () {
+                  CartService.instance.addProduct(product);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('${product.name} added to cart')),
+                  );
+                },
+                icon: const Icon(Icons.shopping_cart),
+                label: const Text('Add to cart'),
+              ),
             ),
           ],
         ),

@@ -1,7 +1,9 @@
 import 'package:exam/Entity/Product.dart';
 import 'package:exam/Views/Pages/AboutPage.dart';
+import 'package:exam/Views/Pages/CartPage.dart';
 import 'package:exam/Views/Pages/ProductDetailPage.dart';
 import 'package:exam/Views/Widgets/ButtonBar.dart';
+import 'package:exam/Views/Widgets/CartBadgeButton.dart';
 import 'package:exam/Views/Widgets/ProductList.dart';
 import 'package:exam/Views/Widgets/Product_Widget.dart';
 import 'package:flutter/material.dart';
@@ -75,11 +77,12 @@ class _HomepageState extends State<Homepage> {
             onPressed: widget.products.isEmpty ? null : openFirstProductDetail,
             icon: const Icon(Icons.details),
           ),
+          const CartBadgeButton(),
         ],
       ),
       body: [
         ProductListReponsive(products: widget.products),
-        const Center(child: Text('Detail product')),
+        const CartView(),
         const Center(child: Text('About')),
       ][_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -91,8 +94,11 @@ class _HomepageState extends State<Homepage> {
           });
         },
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.details), label: 'Detail'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Products'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
+            label: 'Cart',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_box_outlined),
             label: 'About',

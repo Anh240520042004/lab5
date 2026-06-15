@@ -1,4 +1,5 @@
 import 'package:exam/Views/Widgets/AboutWidget.dart';
+import 'package:exam/Views/Pages/CartPage.dart';
 import 'package:exam/Views/Widgets/Product_Widget.dart';
 import 'package:flutter/material.dart';
 
@@ -24,14 +25,17 @@ class _HomepagenavigationbarState extends State<Homepagenavigationbar> {
         },
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.details), label: "Detail"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
+            label: "Cart",
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_box_outlined),
             label: "About",
           ),
         ],
       ),
-      body: [ProductListWidget(), Aboutwidget(), Aboutwidget()][_selectedIndex],
+      body: [ProductListWidget(), CartView(), Aboutwidget()][_selectedIndex],
     );
   }
 }

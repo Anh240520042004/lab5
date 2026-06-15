@@ -1,4 +1,5 @@
 import 'package:exam/Entity/Product.dart';
+import 'package:exam/ViewModel/CartService.dart';
 import 'package:exam/Views/Pages/ProductDetailPage.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +21,13 @@ class _ProductWidgetStateFullState extends State<ProductWidgetStateFull> {
       MaterialPageRoute(
         builder: (context) => ProductDetailPage(product: widget.product),
       ),
+    );
+  }
+
+  void addToCart() {
+    CartService.instance.addProduct(widget.product);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('${widget.product.name} added to cart')),
     );
   }
 
@@ -51,10 +59,10 @@ class _ProductWidgetStateFullState extends State<ProductWidgetStateFull> {
                         child: Padding(
                           padding: const EdgeInsets.all(16),
                           child: FloatingActionButton.extended(
-                            heroTag: 'detail-${widget.product.id}',
-                            onPressed: openDetail,
-                            label: const Text('Detail'),
-                            icon: const Icon(Icons.details),
+                            heroTag: 'cart-${widget.product.id}',
+                            onPressed: addToCart,
+                            label: const Text('Add to cart'),
+                            icon: const Icon(Icons.shopping_cart),
                           ),
                         ),
                       ),

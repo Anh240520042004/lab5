@@ -1,6 +1,6 @@
-import 'package:exam/Views/Widgets/ProductList.dart';
+import 'package:exam/Views/Pages/CartPage.dart';
+import 'package:exam/Views/Widgets/CartBadgeButton.dart';
 import 'package:flutter/material.dart';
-import 'package:exam/Views/Widgets/ButtonBar.dart';
 import 'package:exam/Views/Widgets/Product_Widget.dart';
 
 class HomebuttonnavigationPage extends StatefulWidget {
@@ -20,14 +20,7 @@ class _HomebuttonnavigationPageState extends State<HomebuttonnavigationPage> {
         backgroundColor: Colors.blue,
         leading: Icon(Icons.menu),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Badge(
-              alignment: Alignment.topRight,
-              label: Text("1"),
-              child: Icon(Icons.shopping_cart),
-            ),
-          ),
+          CartBadgeButton(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -35,7 +28,10 @@ class _HomebuttonnavigationPageState extends State<HomebuttonnavigationPage> {
         currentIndex: _selectedIndex,
         items: [
           BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home)),
-          BottomNavigationBarItem(label: "Detail", icon: Icon(Icons.details)),
+          BottomNavigationBarItem(
+            label: "Cart",
+            icon: Icon(Icons.shopping_cart),
+          ),
           BottomNavigationBarItem(
             label: "About",
             icon: Icon(Icons.account_box_outlined),
@@ -47,7 +43,7 @@ class _HomebuttonnavigationPageState extends State<HomebuttonnavigationPage> {
       ),
       body: [
         ProductListWidget(),
-        ProductListWidget(),
+        CartView(),
         // ProductWidget(),
         Center(child: Text("About Author")),
       ][_selectedIndex],

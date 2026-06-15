@@ -8,7 +8,7 @@ class Buttonbar extends StatelessWidget {
       backgroundColor: Colors.blue,
       items: [
         BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home)),
-        BottomNavigationBarItem(label: "Detail", icon: Icon(Icons.details)),
+        BottomNavigationBarItem(label: "Cart", icon: Icon(Icons.shopping_cart)),
         BottomNavigationBarItem(
           label: "About",
           icon: Icon(Icons.account_box_outlined),

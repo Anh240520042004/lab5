@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:exam/Entity/Product.dart';
+import 'package:exam/ViewModel/CartService.dart';
 
 class ProductListWidget extends StatelessWidget {
   ProductListWidget({super.key});
@@ -70,6 +71,14 @@ class ProductContainer extends StatefulWidget {
 
 class _ProductContainerState extends State<ProductContainer> {
   int _selectSort = 0;
+
+  void addToCart() {
+    CartService.instance.addProduct(widget.product);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('${widget.product.name} added to cart')),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -125,7 +134,7 @@ class _ProductContainerState extends State<ProductContainer> {
                       child: Padding(
                         padding: const EdgeInsets.all(20),
                         child: FloatingActionButton.extended(
-                          onPressed: () {},
+                          onPressed: addToCart,
                           label: Text("Add to cart"),
                           icon: Icon(Icons.shopping_cart),
                         ),
